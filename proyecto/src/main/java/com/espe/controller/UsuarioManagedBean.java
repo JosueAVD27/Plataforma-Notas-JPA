@@ -336,6 +336,7 @@ public class UsuarioManagedBean {
 		return "/faces/estudiante/inicio.xhtml";
 	}
 
+	//ADMINISTRADOR
 	// Direccionamiento al inicio Administrador
 	public String irInicioAdmin() {
 		Usuario oUsuario = new Usuario();
@@ -396,6 +397,18 @@ public class UsuarioManagedBean {
 		sessionMap.put("usuario", oUsuario);
 		return "/faces/administrador/matricula/matriculas.xhtml";
 	}
+	
+	//DOCENTE
+	// Direccionamiento a la lista de matriculas de Administrador
+		public String irACalificar() {
+			Usuario oUsuario = new Usuario();
+
+			Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+			sessionMap.put("usuario", oUsuario);
+			return "/faces/docente/calificaciones/notas.xhtml";
+		}
+	
 
 	// ======================================================================
 

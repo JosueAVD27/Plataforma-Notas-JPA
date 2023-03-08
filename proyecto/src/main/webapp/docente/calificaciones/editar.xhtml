@@ -12,11 +12,10 @@
 	<meta charset="utf-8" name="viewport"
 		content="width=device-width, initial-scale=1"
 		http-equiv="X-UA-Conpatible" />
-	<title>Inicio Docente</title>
+	<title>Editar Calificacion</title>
 </h:head>
 <h:body>
-	<h2>Inicio Docente</h2>
-
+	<h2>Calificar</h2>
 	<h:outputText value="#{usuarioSession.username}"></h:outputText>
 	<h:form>
 		<h:commandButton action="#{usuarioManagedBean.irInicioDocente()}"
@@ -26,6 +25,29 @@
 		
 		<h:commandButton action="#{usuarioManagedBean.irACalificar()}"
 			value="Calificar" class="btn_format btn_agregar"></h:commandButton>
+	</h:form>
+
+	<h:form>
+		<h:panelGrid>
+			<f:facet name="header">
+				<h:outputText value="Editar Calificacion de #{notas.idUsuario}"></h:outputText>
+			</f:facet>
+
+			<h:outputText value="Nota 1"></h:outputText>
+			<h:inputText value="#{notas.nota1}"></h:inputText>
+
+			<h:outputText value="Nota 2"></h:outputText>
+			<h:inputText value="#{notas.nota2}"></h:inputText>
+			
+			<h:outputText value="Nota 3"></h:outputText>
+			<h:inputText value="#{notas.nota3}"></h:inputText>
+
+			<f:facet name="footer">
+				<h:commandButton
+					action="#{notasManagedBean.actualizarNotaDocente(notas)}"
+					value="Actualizar"></h:commandButton>
+			</f:facet>
+		</h:panelGrid>
 	</h:form>
 </h:body>
 </html>

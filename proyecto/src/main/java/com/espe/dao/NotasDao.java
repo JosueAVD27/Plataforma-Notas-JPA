@@ -10,6 +10,7 @@ public interface NotasDao {
 
 	// Editar notas
 	public void editarNota(Notas notas);
+	public void editarNotaDocente(Notas notas);
 
 	// Buscar notas
 	public Notas buscarNota(int id);

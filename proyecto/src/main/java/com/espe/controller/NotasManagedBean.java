@@ -32,6 +32,16 @@ public class NotasManagedBean {
 		return "/faces/administrador/matricula/editar.xhtml";
 	}
 
+	public String editarNotaDocente(int id) {
+		Notas oNotas = new Notas();
+		oNotas = notasDAO.buscarNota(id);
+
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+		sessionMap.put("notas", oNotas);
+		return "/faces/docente/calificaciones/editar.xhtml";
+	}
+
 	public String actualizarNota(Notas notas) {
 
 		try {
@@ -49,6 +59,31 @@ public class NotasManagedBean {
 			// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("No existe el Estudiante o la Materia"));
+			return null;
+		}
+
+	}
+
+	public String actualizarNotaDocente(Notas notas) {
+
+		try {
+
+			if (!(String.valueOf(notas.getNota1()).matches("(10(\\.0)?)|([0-9](\\.[0-9])?)"))
+					|| !(String.valueOf(notas.getNota2()).matches("(10(\\.0)?)|([0-9](\\.[0-9])?)"))
+					|| !(String.valueOf(notas.getNota3()).matches("(10(\\.0)?)|([0-9](\\.[0-9])?)"))) {
+				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ingrese una nota valida"));
+				return null;
+			} else {
+				notasDAO.editarNotaDocente(notas);
+				return "/faces/docente/calificaciones/notas.xhtml";
+			}
+
+		} catch (Exception e) {
+			// Manejar la excepción aquí
+			e.printStackTrace();
+			// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Existen problemas"));
 			return null;
 		}
 
@@ -72,8 +107,7 @@ public class NotasManagedBean {
 		try {
 			if (notas.getIdUsuario() == 0 || notas.getIdMateria() == 0) {
 				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("Hay campos vacios"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hay campos vacios"));
 				return null;
 			} else {
 				notasDAO.guardarNota(notas);

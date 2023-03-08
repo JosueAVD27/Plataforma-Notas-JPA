@@ -32,6 +32,13 @@ public class NotasDaoImpl implements NotasDao {
 		entity.merge(notas);
 		entity.getTransaction().commit();
 	}
+	
+	@Override
+	public void editarNotaDocente(Notas notas) {
+		entity.getTransaction().begin();
+		entity.merge(notas);
+		entity.getTransaction().commit();
+	}
 
 	@Override
 	public Notas buscarNota(int id) {
