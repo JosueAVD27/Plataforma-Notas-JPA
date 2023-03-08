@@ -9,12 +9,14 @@ public interface UsuarioDao {
 
 	// Guardar usuario
 	public void guardarUsuario(Usuario usuario);
+	public void guardarUsuarioAdmin(Usuario usuario);
 
 	// Editar usuario
 	public void editarUsuario(Usuario usuario);
 
 	// Buscar usuario
 	public Usuario buscarUsuario(int id);
+	public Usuario buscarUsuarioPorCorreo(String correoUsuario);
 
 	// Obtener todos los usuarios
 	public List<Usuario> obtenerUsuario();

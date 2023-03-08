@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<title>Login</title>
+</h:head>
+<h:body>
+	<h2>Login</h2>
+	<h:form>
+		<h:commandButton action="#{usuarioManagedBean.irIndex()}"
+			value="Inicio" class="btn_format btn_agregar"></h:commandButton>
+		<h:commandButton action="#{usuarioManagedBean.irRegistro()}"
+			value="Registro" class="btn_format btn_agregar"></h:commandButton>
+
+		<h:panelGrid columns="2">
+				<h:outputLabel value="Usuario:" />
+				<h:inputText id="correoUsuario" value="#{usuarioManagedBean.correoUsuario}" required="true" />
+
+				<h:outputLabel value="Contraseña:" />
+				<h:inputSecret id="claveUsuario" value="#{usuarioManagedBean.claveUsuario}" required="true" />
+
+				<h:commandButton value="Ingresar" action="#{usuarioManagedBean.iniciarSesion()}" />
+			</h:panelGrid>
+			<h:message for="correoUsuario" />
+			<h:message for="claveUsuario" />
+			<h:message id="loginMessage" for="loginButton" />
+	</h:form>
+</h:body>
+</html>
