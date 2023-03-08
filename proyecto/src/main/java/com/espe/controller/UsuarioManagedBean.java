@@ -170,6 +170,10 @@ public class UsuarioManagedBean {
 		return usuarioDAO.obtenerUsuarioDocente();
 	}
 
+	public List<Usuario> obtenerUsuarioEstudiante() {
+		return usuarioDAO.obtenerUsuarioEstudiante();
+	}
+
 	public String editarUsuario(int id) {
 		Usuario oUsuario = new Usuario();
 		oUsuario = usuarioDAO.buscarUsuario(id);
@@ -181,8 +185,44 @@ public class UsuarioManagedBean {
 	}
 
 	public String actualizarUsuario(Usuario usuario) {
-		usuarioDAO.editarUsuario(usuario);
-		return "/faces/administrador/usuario/usuarios.xhtml";
+
+		try {
+			if (usuario.getUsername() == "" || usuario.getNombreUsuario() == "" || usuario.getApellidoUsuario() == ""
+					|| usuario.getClaveUsuario() == "" || usuario.getCedulaUsuario() == ""
+					|| usuario.getTelefonoUsuario() == "" || usuario.getCorreoUsuario() == "") {
+				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hay campos vacios"));
+				return null;
+			} else if (!(usuario.getCedulaUsuario().matches("^\\d{10}$"))) {
+
+				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cedula no valida"));
+				return null;
+
+			} else if (!(usuario.getTelefonoUsuario().matches("^(0|\\+593)[9][2-9][0-9]{7}$"))) {
+
+				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Telefono no valido"));
+				return null;
+
+			} else if (!(usuario.getCorreoUsuario().matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"))) {
+
+				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Correo no valido"));
+				return null;
+
+			} else {
+				usuarioDAO.editarUsuario(usuario);
+				return "/faces/administrador/usuario/usuarios.xhtml";
+			}
+
+		} catch (Exception e) {
+			// Manejar la excepción aquí
+			e.printStackTrace();
+			// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Datos invalidos"));
+			return null;
+		}
 	}
 
 	public String eliminarUsuario(int id) {
@@ -199,14 +239,29 @@ public class UsuarioManagedBean {
 				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hay campos vacios"));
 				return null;
-			} else if(usuario.getCorreoUsuario().matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$")){
-				usuarioDAO.guardarUsuario(usuario);
-				return "/faces/views/login.xhtml";
-			}else {
+			} else if (!(usuario.getCedulaUsuario().matches("^\\d{10}$"))) {
+
+				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cedula no valida"));
+				return null;
+
+			} else if (!(usuario.getTelefonoUsuario().matches("^(0|\\+593)[9][2-9][0-9]{7}$"))) {
+
+				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Telefono no valido"));
+				return null;
+
+			} else if (!(usuario.getCorreoUsuario().matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"))) {
+
 				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Correo no valido"));
 				return null;
+
+			} else {
+				usuarioDAO.guardarUsuario(usuario);
+				return "/faces/views/login.xhtml";
 			}
+
 		} catch (Exception e) {
 			// Manejar la excepción aquí
 			e.printStackTrace();
@@ -330,6 +385,16 @@ public class UsuarioManagedBean {
 
 		sessionMap.put("usuario", oUsuario);
 		return "/faces/administrador/materia/materias.xhtml";
+	}
+
+	// Direccionamiento a la lista de matriculas de Administrador
+	public String irListaMatriculasAdmin() {
+		Usuario oUsuario = new Usuario();
+
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+		sessionMap.put("usuario", oUsuario);
+		return "/faces/administrador/matricula/matriculas.xhtml";
 	}
 
 	// ======================================================================

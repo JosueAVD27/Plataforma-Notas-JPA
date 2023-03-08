@@ -62,6 +62,15 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		listaUsuarioDocente = q.getResultList();
 		return listaUsuarioDocente;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Usuario> obtenerUsuarioEstudiante() {
+		List<Usuario> listaUsuarioEstudiante = new ArrayList<Usuario>();
+		Query q = entity.createQuery("SELECT c from Usuario c WHERE idTipo=1");
+		listaUsuarioEstudiante = q.getResultList();
+		return listaUsuarioEstudiante;
+	}
 
 	@Override
 	public void eliminarUsuario(int id) {

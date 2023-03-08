@@ -8,7 +8,9 @@ import javax.persistence.Query;
 
 import com.espe.dao.NotasDao;
 import com.espe.model.JPAUtil;
+import com.espe.model.Materia;
 import com.espe.model.Notas;
+import com.espe.model.Usuario;
 
 public class NotasDaoImpl implements NotasDao {
 
@@ -17,6 +19,9 @@ public class NotasDaoImpl implements NotasDao {
 	@Override
 	public void guardarNota(Notas notas) {
 		entity.getTransaction().begin();
+		notas.setNota1(0);
+		notas.setNota2(0);
+		notas.setNota3(0);
 		entity.persist(notas);
 		entity.getTransaction().commit();
 	}

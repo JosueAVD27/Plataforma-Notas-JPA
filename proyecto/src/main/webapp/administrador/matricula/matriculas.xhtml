@@ -12,10 +12,10 @@
 	<meta charset="utf-8" name="viewport"
 		content="width=device-width, initial-scale=1"
 		http-equiv="X-UA-Conpatible" />
-	<title>Materias</title>
+	<title>Matriculas</title>
 </h:head>
 <h:body>
-	<h2>Materias</h2>
+	<h2>Matriculas</h2>
 
 	<h:outputText value="#{usuarioSession.username}"></h:outputText>
 	<h:form>
@@ -31,57 +31,59 @@
 			action="#{usuarioManagedBean.irListaConfiguracionesAdmin()}"
 			value="Permisos" class="btn_format btn_agregar"></h:commandButton>
 
-		<h:commandButton
-			action="#{usuarioManagedBean.irListaMatriculasAdmin()}"
-			value="Matricula" class="btn_format btn_agregar"></h:commandButton>
+		<h:commandButton action="#{usuarioManagedBean.irListaMateriasAdmin()}"
+			value="Materias" class="btn_format btn_agregar"></h:commandButton>
 
 	</h:form>
 
 	<section class="contenedorX">
 
 		<h2>
-			<h:outputText value="Lista de Materias"></h:outputText>
+			<h:outputText value="Lista de Matriculas"></h:outputText>
 		</h2>
 
 		<h:form>
-			<h:commandButton value="Nueva Materia"
-				action="#{materiaManagedBean.nuevoMateria()}" />
+			<h:commandButton value="Nueva Matricula"
+				action="#{notasManagedBean.nuevoNota()}" />
 
 
-			<h:dataTable value="#{materiaManagedBean.obtenerMateria()}"
-				var="materia" border="1">
+			<h:dataTable value="#{notasManagedBean.obtenerNota()}" var="notas"
+				border="1">
 				<h:column rendered="false">
 					<f:facet name="header">ID</f:facet>
-					<h:outputText value="#{materia.idMateria}"></h:outputText>
+					<h:outputText value="#{notas.idNotas}"></h:outputText>
 				</h:column>
 				<h:column>
-					<f:facet name="header">NRC</f:facet>
-					<h:outputText value="#{materia.nrc}"></h:outputText>
+					<f:facet name="header">Estudiante</f:facet>
+					<h:outputText value="#{notas.idUsuario}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">Materia</f:facet>
-					<h:outputText value="#{materia.nombreMateria}"></h:outputText>
+					<h:outputText value="#{notas.idMateria}"></h:outputText>
 				</h:column>
 				<h:column>
-					<f:facet name="header">Docente</f:facet>
-					<h:outputText value="#{materia.idUsuario}"></h:outputText>
+					<f:facet name="header">Nota 1</f:facet>
+					<h:outputText value="#{notas.nota1}"></h:outputText>
 				</h:column>
 				<h:column>
-					<f:facet name="header">Estado</f:facet>
-					<h:outputText
-						value="#{materia.idEstado eq 1 ? 'Activo' : materia.idEstado eq 2 ? 'Inactivo' : ''}"></h:outputText>
+					<f:facet name="header">Nota 2</f:facet>
+					<h:outputText value="#{notas.nota2}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nota 3</f:facet>
+					<h:outputText value="#{notas.nota3}"></h:outputText>
 				</h:column>
 
 				<h:column>
 					<f:facet name="header"></f:facet>
 					<h:commandButton
-						action="#{materiaManagedBean.editarMateria(materia.idMateria)}"
+						action="#{notasManagedBean.editarNota(notas.idNotas)}"
 						value="Editar" class="btn_format btn_editar"></h:commandButton>
 				</h:column>
 				<h:column>
 					<f:facet name="header"></f:facet>
 					<h:commandButton
-						action="#{materiaManagedBean.eliminarMateria(materia.idMateria)}"
+						action="#{notasManagedBean.eliminarNota(notas.idNotas)}"
 						value="Eliminar" class="btn_format btn_cerrar"></h:commandButton>
 				</h:column>
 			</h:dataTable>

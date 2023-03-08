@@ -29,17 +29,34 @@ public class NotasManagedBean {
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 		sessionMap.put("notas", oNotas);
-		return "/faces/editar.xhtml";
+		return "/faces/administrador/matricula/editar.xhtml";
 	}
 
 	public String actualizarNota(Notas notas) {
-		notasDAO.editarNota(notas);
-		return "/faces/index.xhtml";
+
+		try {
+			if (notas.getIdUsuario() == 0 || notas.getIdMateria() == 0) {
+				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hay campos vacios"));
+				return null;
+			} else {
+				notasDAO.editarNota(notas);
+				return "/faces/administrador/matricula/matriculas.xhtml";
+			}
+		} catch (Exception e) {
+			// Manejar la excepción aquí
+			e.printStackTrace();
+			// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("No existe el Estudiante o la Materia"));
+			return null;
+		}
+
 	}
 
 	public String eliminarNota(int id) {
 		notasDAO.eliminarNota(id);
-		return "/faces/index.xhtml";
+		return "/faces/administrador/matricula/matriculas.xhtml";
 	}
 
 	public String nuevoNota() {
@@ -48,7 +65,7 @@ public class NotasManagedBean {
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 		sessionMap.put("notas", oNotas);
-		return "/faces/nuevo.xhtml";
+		return "/faces/administrador/matricula/nuevo.xhtml";
 	}
 
 	public String guardarNota(Notas notas) {
@@ -56,7 +73,7 @@ public class NotasManagedBean {
 			if (notas.getIdUsuario() == 0 || notas.getIdMateria() == 0) {
 				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("No existe el Estudiante o la Materia"));
+						new FacesMessage("Hay campos vacios"));
 				return null;
 			} else {
 				notasDAO.guardarNota(notas);
