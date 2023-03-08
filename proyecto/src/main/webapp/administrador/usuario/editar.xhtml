@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<title>Editar Usuario</title>
+</h:head>
+<h:body>
+	<h2>Editar Usuario</h2>
+	<h:outputText value="#{usuarioSession.username}"></h:outputText>
+	<h:form>
+		<h:commandButton action="#{usuarioManagedBean.irInicioAdmin()}" value="Inicio" class="btn_format btn_agregar"></h:commandButton>
+		<h:commandButton action="#{usuarioManagedBean.cerrarSesion()}" value="Salir" class="btn_format btn_agregar"></h:commandButton>
+		<h:commandButton action="#{usuarioManagedBean.irListaUsuariosAdmin()}" value="Usuarios" class="btn_format btn_agregar"></h:commandButton>
+	</h:form>
+	
+	<h:form>
+		<h:panelGrid>
+			<f:facet name="header">
+				<h:outputText value="Editar Usuario"></h:outputText>
+			</f:facet>
+
+			<h:outputText value="Usuario"></h:outputText>
+			<h:inputText value="#{usuario.username}"></h:inputText>
+
+			<h:outputText value="Nombres"></h:outputText>
+			<h:inputText value="#{usuario.nombreUsuario}"></h:inputText>
+
+			<h:outputText value="Apellidos"></h:outputText>
+			<h:inputText value="#{usuario.apellidoUsuario}"></h:inputText>
+
+			<h:outputText value="Clave"></h:outputText>
+			<h:inputText value="#{usuario.claveUsuario}"></h:inputText>
+
+			<h:outputText value="Cedula"></h:outputText>
+			<h:inputText value="#{usuario.cedulaUsuario}"></h:inputText>
+			
+			<h:outputText value="Telefono"></h:outputText>
+			<h:inputText value="#{usuario.telefonoUsuario}"></h:inputText>
+			
+			<h:outputText value="Correo"></h:outputText>
+			<h:inputText value="#{usuario.correoUsuario}"></h:inputText>
+			
+			<h:outputText value="Tipo usuario"></h:outputText>
+			<h:inputText value="#{usuario.idTipo}" converter="javax.faces.Number">
+    			<f:attribute name="type" value="number" />
+			</h:inputText>
+			
+			<h:outputText value="Estado usuario"></h:outputText>
+			<h:inputText value="#{usuario.idEstado}" converter="javax.faces.Number">
+    			<f:attribute name="type" value="number" />
+			</h:inputText>
+
+			<f:facet name="footer">
+				<h:commandButton action="#{usuarioManagedBean.actualizarUsuario(usuario)}" value="Actualizar"></h:commandButton>
+			</f:facet>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>

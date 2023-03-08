@@ -23,6 +23,8 @@ public class UsuarioManagedBean {
 	private String correoUsuario;
 	private String claveUsuario;
 
+	// ======================================================================
+
 	UsuarioDao usuarioDAO = new UsuarioDaoImpl();
 
 	// Login
@@ -52,7 +54,7 @@ public class UsuarioManagedBean {
 			sessionMap.put("usuarioSession", usuario);
 
 			if (usuario.getIdTipo() == 1) {
-				return "/faces/views/inicio.xhtml";
+				return "/faces/estudiante/inicio.xhtml";
 			} else if (usuario.getIdTipo() == 2) {
 				return "/faces/docente/inicio.xhtml";
 			} else {
@@ -74,6 +76,8 @@ public class UsuarioManagedBean {
 		return "/faces/views/login.xhtml";
 	}
 
+	// ======================================================================
+
 	// Metodos
 	public List<Usuario> obtenerUsuario() {
 		return usuarioDAO.obtenerUsuario();
@@ -86,19 +90,21 @@ public class UsuarioManagedBean {
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 		sessionMap.put("usuario", oUsuario);
-		return "/faces/editar.xhtml";
+		return "/faces/administrador/usuario/editar.xhtml";
 	}
 
 	public String actualizarUsuario(Usuario usuario) {
 		usuarioDAO.editarUsuario(usuario);
-		return "/faces/index.xhtml";
+		return "/faces/administrador/usuario/usuarios.xhtml";
 	}
 
 	public String eliminarUsuario(int id) {
 		usuarioDAO.eliminarUsuario(id);
-		return "/faces/index.xhtml";
+		return "/faces/administrador/usuario/usuarios.xhtml";
 	}
 
+	
+	//xd?
 	public String nuevoUsuario() {
 		Usuario oUsuario = new Usuario();
 
@@ -108,6 +114,7 @@ public class UsuarioManagedBean {
 		return "/faces/nuevo.xhtml";
 	}
 
+	
 	public String guardarUsuario(Usuario usuario) {
 		usuarioDAO.guardarUsuario(usuario);
 		return "/faces/views/login.xhtml";
@@ -117,6 +124,8 @@ public class UsuarioManagedBean {
 		usuarioDAO.guardarUsuario(usuario);
 		return "/faces/index.xhtml";
 	}
+
+	// ======================================================================
 
 	// Direccionamiento al index (Plataforma)
 	public String irIndex() {
@@ -148,14 +157,14 @@ public class UsuarioManagedBean {
 		return "/faces/views/registro.xhtml";
 	}
 
-	// Direccionamiento al inicio
+	// Direccionamiento al inicio estudiante
 	public String irInicio() {
 		Usuario oUsuario = new Usuario();
 
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 		sessionMap.put("usuario", oUsuario);
-		return "/faces/views/inicio.xhtml";
+		return "/faces/estudiante/inicio.xhtml";
 	}
 
 	// Direccionamiento al inicio Administrador
@@ -168,20 +177,28 @@ public class UsuarioManagedBean {
 		return "/faces/administrador/inicio.xhtml";
 	}
 	
-	// Direccionamiento al inicio Docente
-		public String irInicioDocente() {
+	// Direccionamiento a la lista de usuarios de Administrador
+		public String irListaUsuariosAdmin() {
 			Usuario oUsuario = new Usuario();
 
 			Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 			sessionMap.put("usuario", oUsuario);
-			return "/faces/docente/inicio.xhtml";
+			return "/faces/administrador/usuario/usuarios.xhtml";
 		}
 
-	
-	
-	
-	
+	// Direccionamiento al inicio Docente
+	public String irInicioDocente() {
+		Usuario oUsuario = new Usuario();
+
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+		sessionMap.put("usuario", oUsuario);
+		return "/faces/docente/inicio.xhtml";
+	}
+
+	// ======================================================================
+
 	// Metodos Getters and Setters
 	public String getCorreoUsuario() {
 		return correoUsuario;
