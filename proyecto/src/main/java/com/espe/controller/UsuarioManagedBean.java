@@ -78,7 +78,7 @@ public class UsuarioManagedBean {
 	public Usuario autenticarUsuario(String correoUsuario, String claveUsuario) {
 		Usuario usuario = usuarioDAO.buscarUsuarioPorCorreo(correoUsuario);
 
-		if (usuario != null && usuario.getClaveUsuario().equals(claveUsuario)) {
+		if (usuario != null && usuario.getClaveUsuario().equals(claveUsuario) && usuario.getIdEstado() == 1) {
 			// Si el usuario existe y la contraseña es correcta, lo guardamos en la lista de
 			// usuarios conectados
 			users.put(correoUsuario, claveUsuario);

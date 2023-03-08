@@ -53,15 +53,21 @@
 			<h:inputText value="#{usuario.correoUsuario}"></h:inputText>
 
 			<h:outputText value="Tipo usuario"></h:outputText>
-			<h:inputText value="#{usuario.idTipo}" converter="javax.faces.Number">
-				<f:attribute name="type" value="number" />
-			</h:inputText>
+			<h:selectOneMenu value="#{usuario.idTipo}">
+				<f:selectItem itemValue="#{usuario.idTipo}" itemLabel="Cambiar" />
+				<f:selectItem itemValue="1" itemLabel="Estudiante" />
+				<f:selectItem itemValue="2" itemLabel="Docente" />
+				<f:selectItem itemValue="3" itemLabel="Administrador" />
+				<f:converter converterId="javax.faces.Number" />
+			</h:selectOneMenu>
 
 			<h:outputText value="Estado usuario"></h:outputText>
-			<h:inputText value="#{usuario.idEstado}"
-				converter="javax.faces.Number">
-				<f:attribute name="type" value="number" />
-			</h:inputText>
+			<h:selectOneMenu value="#{usuario.idEstado}">
+				<f:selectItem itemValue="#{usuario.idEstado}" itemLabel="Cambiar" />
+				<f:selectItem itemValue="1" itemLabel="Activo" />
+				<f:selectItem itemValue="2" itemLabel="Inactivo" />
+				<f:converter converterId="javax.faces.Number" />
+			</h:selectOneMenu>
 
 			<f:facet name="footer">
 				<h:commandButton

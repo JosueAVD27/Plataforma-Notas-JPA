@@ -11,11 +11,13 @@
 <h:body>
 	<h2>Registro</h2>
 	<h:form>
-		<h:commandButton action="#{usuarioManagedBean.irIndex()}" value="Inicio" class="btn_format btn_agregar"></h:commandButton>
-		<h:commandButton action="#{usuarioManagedBean.irLogin()}" value="Login" class="btn_format btn_agregar"></h:commandButton>
-		
+		<h:commandButton action="#{usuarioManagedBean.irIndex()}"
+			value="Inicio" class="btn_format btn_agregar"></h:commandButton>
+		<h:commandButton action="#{usuarioManagedBean.irLogin()}"
+			value="Login" class="btn_format btn_agregar"></h:commandButton>
+
 		<h:panelGrid border="1">
-			<f:facet  name="header">
+			<f:facet name="header">
 				<h:outputText value="Agregar Usuario"></h:outputText>
 			</f:facet>
 
@@ -33,26 +35,18 @@
 
 			<h:outputText value="Cedula"></h:outputText>
 			<h:inputText value="#{usuario.cedulaUsuario}"></h:inputText>
-			
+
 			<h:outputText value="Telefono"></h:outputText>
 			<h:inputText value="#{usuario.telefonoUsuario}"></h:inputText>
-			
+
 			<h:outputText value="Correo"></h:outputText>
 			<h:inputText value="#{usuario.correoUsuario}"></h:inputText>
-			
-			<h:outputText value="Tipo usuario"></h:outputText>
-			<h:inputText value="#{usuario.idTipo}" converter="javax.faces.Number">
-    			<f:attribute name="type" value="number" />
-			</h:inputText>
-			
-			<h:outputText value="Estado usuario"></h:outputText>
-			<h:inputText value="#{usuario.idEstado}" converter="javax.faces.Number">
-    			<f:attribute name="type" value="number" />
-			</h:inputText>
-					
+
 			<f:facet name="footer">
-				<h:commandButton action="#{usuarioManagedBean.guardarUsuario(usuario)}" value="Registrar"></h:commandButton>
-			</f:facet>	
+				<h:commandButton
+					action="#{usuarioManagedBean.guardarUsuario(usuario)}"
+					value="Registrar"></h:commandButton>
+			</f:facet>
 
 		</h:panelGrid>
 	</h:form>

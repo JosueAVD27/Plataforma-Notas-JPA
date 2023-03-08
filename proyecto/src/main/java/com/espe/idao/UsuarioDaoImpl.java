@@ -18,6 +18,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	@Override
 	public void guardarUsuario(Usuario usuario) {
 		entity.getTransaction().begin();
+		usuario.setIdTipo(1);
+		usuario.setIdEstado(1);
 		entity.persist(usuario);
 		entity.getTransaction().commit();
 	}

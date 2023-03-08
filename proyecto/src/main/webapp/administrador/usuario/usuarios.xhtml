@@ -33,7 +33,7 @@
 		<h:form>
 			<h:dataTable value="#{usuarioManagedBean.obtenerUsuario()}"
 				var="usuario" border="1">
-				<h:column>
+				<h:column rendered="false">
 					<f:facet name="header">ID</f:facet>
 					<h:outputText value="#{usuario.idUsuario}"></h:outputText>
 				</h:column>
@@ -48,6 +48,24 @@
 				<h:column>
 					<f:facet name="header">Cedula</f:facet>
 					<h:outputText value="#{usuario.cedulaUsuario}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Telefono</f:facet>
+					<h:outputText value="#{usuario.telefonoUsuario}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Correo</f:facet>
+					<h:outputText value="#{usuario.correoUsuario}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Estado</f:facet>
+					<h:outputText
+						value="#{usuario.idEstado eq 1 ? 'Activo' : usuario.idEstado eq 2 ? 'Inactivo' : ''}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Permisos</f:facet>
+					<h:outputText
+						value="#{usuario.idTipo eq 1 ? 'Estudiante' : usuario.idTipo eq 2 ? 'Docente' : usuario.idTipo eq 3 ? 'Administrador' : ''}"></h:outputText>
 				</h:column>
 				<h:column>
 					<f:facet name="header"></f:facet>
