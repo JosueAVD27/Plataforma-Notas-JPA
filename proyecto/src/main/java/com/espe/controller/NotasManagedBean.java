@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import com.espe.dao.NotasDao;
 import com.espe.idao.NotasDaoImpl;
 import com.espe.model.Notas;
+import com.espe.model.registroNotas;
 
 @ManagedBean(name = "notasManagedBean")
 @RequestScoped
@@ -45,7 +46,7 @@ public class NotasManagedBean {
 	public String actualizarNota(Notas notas) {
 
 		try {
-			if (notas.getIdUsuario() == 0 || notas.getIdMateria() == 0) {
+			if (notas.getUsuario().getIdUsuario() == 0 || notas.getIdMateria() == 0) {
 				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hay campos vacios"));
 				return null;
@@ -95,22 +96,24 @@ public class NotasManagedBean {
 	}
 
 	public String nuevoNota() {
-		Notas oNotas = new Notas();
+		registroNotas oRegistroNotas = new registroNotas();
 
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
-		sessionMap.put("notas", oNotas);
+		sessionMap.put("registroNotas", oRegistroNotas);
 		return "/faces/administrador/matricula/nuevo.xhtml";
 	}
-
-	public String guardarNota(Notas notas) {
+	
+	
+	
+	public String guardarNota(registroNotas registroNotas) {
 		try {
-			if (notas.getIdUsuario() == 0 || notas.getIdMateria() == 0) {
+			if (registroNotas.getIdUsuario() == 0 || registroNotas.getIdMateria() == 0) {
 				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hay campos vacios"));
 				return null;
 			} else {
-				notasDAO.guardarNota(notas);
+				notasDAO.guardarNota(registroNotas);
 				return "/faces/administrador/matricula/matriculas.xhtml";
 			}
 		} catch (Exception e) {

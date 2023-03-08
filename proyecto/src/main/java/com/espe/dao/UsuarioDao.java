@@ -23,6 +23,8 @@ public interface UsuarioDao {
 	public List<Usuario> obtenerUsuarioDocente();
 	public List<Usuario> obtenerUsuarioEstudiante();
 
+	public List<Usuario> prueba();
+
 	// Eliminar usuario
 	public void eliminarUsuario(int id);
 }

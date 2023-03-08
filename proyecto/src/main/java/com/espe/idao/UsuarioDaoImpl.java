@@ -2,7 +2,9 @@ package com.espe.idao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -10,6 +12,7 @@ import javax.persistence.Query;
 import com.espe.dao.UsuarioDao;
 import com.espe.model.Usuario;
 import com.espe.model.JPAUtil;
+import com.espe.model.Notas;
 
 public class UsuarioDaoImpl implements UsuarioDao {
 
@@ -97,4 +100,17 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	    return usuario;
 	}
 
+	@Override
+	public List<Usuario> prueba() {
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		Usuario u = (Usuario) sessionMap.get("usuarioSession");
+				
+		int variable = u.getIdTipo();
+		
+		List<Usuario> listaUsuarioEstudiante = new ArrayList<Usuario>();
+		Query q = entity.createQuery("SELECT c from Usuario c WHERE c.idTipo = :variable");
+		q.setParameter("variable", variable);
+		listaUsuarioEstudiante = q.getResultList();
+		return listaUsuarioEstudiante;
+	}
 }

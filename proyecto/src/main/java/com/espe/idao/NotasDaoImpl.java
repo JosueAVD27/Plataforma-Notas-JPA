@@ -8,21 +8,30 @@ import javax.persistence.Query;
 
 import com.espe.dao.NotasDao;
 import com.espe.model.JPAUtil;
-import com.espe.model.Materia;
 import com.espe.model.Notas;
-import com.espe.model.Usuario;
+import com.espe.model.registroNotas;
 
 public class NotasDaoImpl implements NotasDao {
 
 	EntityManager entity = JPAUtil.getEntityManagerFactory().createEntityManager();
 
-	@Override
+	/*@Override
 	public void guardarNota(Notas notas) {
 		entity.getTransaction().begin();
 		notas.setNota1(0);
 		notas.setNota2(0);
 		notas.setNota3(0);
 		entity.persist(notas);
+		entity.getTransaction().commit();
+	}*/
+	
+	@Override
+	public void guardarNota(registroNotas registroNotas) {
+		entity.getTransaction().begin();
+		registroNotas.setNota1(0);
+		registroNotas.setNota2(0);
+		registroNotas.setNota3(0);
+		entity.persist(registroNotas);
 		entity.getTransaction().commit();
 	}
 
@@ -46,15 +55,18 @@ public class NotasDaoImpl implements NotasDao {
 		oNotas = entity.find(Notas.class, id);
 		return oNotas;
 	}
+	
+
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Notas> obtenerNota() {
-		List<Notas> listaNotas = new ArrayList<Notas>();
-		Query q = entity.createQuery("SELECT c from Notas c");
-		listaNotas = q.getResultList();
-		return listaNotas;
+	    List<Notas> listaNotas = new ArrayList<Notas>();
+	    Query q = entity.createQuery("SELECT c from Notas c JOIN FETCH c.usuario");
+	    listaNotas = q.getResultList();
+	    return listaNotas;
 	}
+
 
 	@Override
 	public void eliminarNota(int id) {

@@ -67,8 +67,14 @@ public class UsuarioManagedBean {
 	public void setAuthenticatedEstudiante(boolean isAuthenticated) {
 		this.isAuthenticatedEstudiante = isAuthenticated;
 	}
+	
+	
 
 	// ======================================================================
+
+	public UsuarioManagedBean() {
+		super();
+	}
 
 	UsuarioDao usuarioDAO = new UsuarioDaoImpl();
 
@@ -172,6 +178,10 @@ public class UsuarioManagedBean {
 
 	public List<Usuario> obtenerUsuarioEstudiante() {
 		return usuarioDAO.obtenerUsuarioEstudiante();
+	}
+	
+	public List<Usuario> prueba() {
+		return usuarioDAO.prueba();
 	}
 
 	public String editarUsuario(int id) {

@@ -1,10 +1,15 @@
 package com.espe.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -37,10 +42,26 @@ public class Usuario {
 	@Column
 	private int idEstado;
 	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notas> notas = new ArrayList<>();
+	
 	public Usuario() {
 		super();
 	}
 	
+	
+	
+
+	public List<Notas> getNotas() {
+		return notas;
+	}
+
+	public void setNotas(List<Notas> notas) {
+		this.notas = notas;
+	}
+
+
+
 
 	public int getIdUsuario() {
 		return idUsuario;

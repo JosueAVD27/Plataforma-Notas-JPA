@@ -3,10 +3,12 @@ package com.espe.dao;
 import java.util.List;
 
 import com.espe.model.Notas;
+import com.espe.model.registroNotas;
 
 public interface NotasDao {
 	// Guardar notas
-	public void guardarNota(Notas notas);
+	/*public void guardarNota(Notas notas);*/
+	public void guardarNota(registroNotas registroNotas);
 
 	// Editar notas
 	public void editarNota(Notas notas);

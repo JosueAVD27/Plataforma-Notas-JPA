@@ -2,29 +2,20 @@ package com.espe.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="notas")
-public class Notas {
+public class registroNotas {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idNotas;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
-	
-	/*@Column
-	private int idUsuario;*/
-	
+	@Column
+	private int idUsuario;
 	@Column
 	private int idMateria;
 	@Column
@@ -34,8 +25,8 @@ public class Notas {
 	@Column
 	private double nota3;
 	
-
-	public Notas() {
+	
+	public registroNotas() {
 		super();
 	}
 
@@ -49,17 +40,7 @@ public class Notas {
 		this.idNotas = idNotas;
 	}
 
-	
-	public Usuario getUsuario() {
-		return usuario;
-	}
 
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-/*
 	public int getIdUsuario() {
 		return idUsuario;
 	}
@@ -69,7 +50,7 @@ public class Notas {
 		this.idUsuario = idUsuario;
 	}
 
-*/
+
 	public int getIdMateria() {
 		return idMateria;
 	}
@@ -112,16 +93,12 @@ public class Notas {
 
 	@Override
 	public String toString() {
-		return "Notas [idNotas=" + idNotas + ", usuario=" + usuario + ", idMateria=" + idMateria + ", nota1=" + nota1
-				+ ", nota2=" + nota2 + ", nota3=" + nota3 + "]";
+		return "registroNotas [idNotas=" + idNotas + ", idUsuario=" + idUsuario + ", idMateria=" + idMateria
+				+ ", nota1=" + nota1 + ", nota2=" + nota2 + ", nota3=" + nota3 + "]";
 	}
+	
 
-/*
-	@Override
-	public String toString() {
-		return "Notas [idNotas=" + idNotas + ", idUsuario=" + idUsuario + ", idMateria=" + idMateria + ", nota1="
-				+ nota1 + ", nota2=" + nota2 + ", nota3=" + nota3 + "]";
-	}*/
+	
 	
 	
 }
