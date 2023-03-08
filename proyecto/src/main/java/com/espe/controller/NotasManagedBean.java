@@ -3,6 +3,7 @@ package com.espe.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -16,11 +17,11 @@ import com.espe.model.Notas;
 public class NotasManagedBean {
 
 	NotasDao notasDAO = new NotasDaoImpl();
-	
+
 	public List<Notas> obtenerNota() {
 		return notasDAO.obtenerNota();
 	}
-	
+
 	public String editarNota(int id) {
 		Notas oNotas = new Notas();
 		oNotas = notasDAO.buscarNota(id);
@@ -30,17 +31,17 @@ public class NotasManagedBean {
 		sessionMap.put("notas", oNotas);
 		return "/faces/editar.xhtml";
 	}
-	
+
 	public String actualizarNota(Notas notas) {
 		notasDAO.editarNota(notas);
 		return "/faces/index.xhtml";
 	}
-	
+
 	public String eliminarNota(int id) {
 		notasDAO.eliminarNota(id);
 		return "/faces/index.xhtml";
 	}
-	
+
 	public String nuevoNota() {
 		Notas oNotas = new Notas();
 
@@ -49,9 +50,25 @@ public class NotasManagedBean {
 		sessionMap.put("notas", oNotas);
 		return "/faces/nuevo.xhtml";
 	}
-	
+
 	public String guardarNota(Notas notas) {
-		notasDAO.guardarNota(notas);
-		return "/faces/index.xhtml";
+		try {
+			if (notas.getIdUsuario() == 0 || notas.getIdMateria() == 0) {
+				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("No existe el Estudiante o la Materia"));
+				return null;
+			} else {
+				notasDAO.guardarNota(notas);
+				return "/faces/administrador/matricula/matriculas.xhtml";
+			}
+		} catch (Exception e) {
+			// Manejar la excepción aquí
+			e.printStackTrace();
+			// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("No existe el Estudiante o la Materia"));
+			return null;
+		}
 	}
 }

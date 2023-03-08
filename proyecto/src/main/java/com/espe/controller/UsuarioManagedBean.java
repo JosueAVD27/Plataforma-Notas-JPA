@@ -17,9 +17,8 @@ import com.espe.model.Usuario;
 
 @ManagedBean(name = "usuarioManagedBean")
 @SessionScoped
-public class UsuarioManagedBean{
+public class UsuarioManagedBean {
 
-	
 	// Variables de session
 	private String correoUsuario;
 	private String claveUsuario;
@@ -166,7 +165,7 @@ public class UsuarioManagedBean{
 	public List<Usuario> obtenerUsuario() {
 		return usuarioDAO.obtenerUsuario();
 	}
-	
+
 	public List<Usuario> obtenerUsuarioDocente() {
 		return usuarioDAO.obtenerUsuarioDocente();
 	}
@@ -192,8 +191,29 @@ public class UsuarioManagedBean{
 	}
 
 	public String guardarUsuario(Usuario usuario) {
-		usuarioDAO.guardarUsuario(usuario);
-		return "/faces/views/login.xhtml";
+
+		try {
+			if (usuario.getUsername() == "" || usuario.getNombreUsuario() == "" || usuario.getApellidoUsuario() == ""
+					|| usuario.getClaveUsuario() == "" || usuario.getCedulaUsuario() == ""
+					|| usuario.getTelefonoUsuario() == "" || usuario.getCorreoUsuario() == "") {
+				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hay campos vacios"));
+				return null;
+			} else if(usuario.getCorreoUsuario().matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$")){
+				usuarioDAO.guardarUsuario(usuario);
+				return "/faces/views/login.xhtml";
+			}else {
+				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Correo no valido"));
+				return null;
+			}
+		} catch (Exception e) {
+			// Manejar la excepción aquí
+			e.printStackTrace();
+			// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Datos invalidos"));
+			return null;
+		}
 	}
 
 	public String guardarUsuarioAdmin(Usuario usuario) {
@@ -301,16 +321,16 @@ public class UsuarioManagedBean{
 		sessionMap.put("usuario", oUsuario);
 		return "/faces/administrador/configutaciones/permisos.xhtml";
 	}
-	
+
 	// Direccionamiento a la lista de materias de Administrador
-		public String irListaMateriasAdmin() {
-			Usuario oUsuario = new Usuario();
+	public String irListaMateriasAdmin() {
+		Usuario oUsuario = new Usuario();
 
-			Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
-			sessionMap.put("usuario", oUsuario);
-			return "/faces/administrador/materia/materias.xhtml";
-		}
+		sessionMap.put("usuario", oUsuario);
+		return "/faces/administrador/materia/materias.xhtml";
+	}
 
 	// ======================================================================
 
