@@ -1,3 +1,10 @@
+*/GRUPO 1
+- Ajila Miguel
+- Enriquez Selena
+- Gonzales Daniela
+- Velasquez Josue
+/*
+
 package com.espe.model;
 
 import javax.persistence.Column;
