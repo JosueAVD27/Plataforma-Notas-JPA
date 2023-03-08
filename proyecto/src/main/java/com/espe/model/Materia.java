@@ -6,9 +6,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,8 +27,11 @@ public class Materia {
 	private int nrc;
 	@Column
 	private String nombreMateria;
-	@Column
-	private int idUsuario;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuarioD;
+	
 	@Column
 	private int idEstado;
 	
@@ -80,14 +86,16 @@ public class Materia {
 	}
 
 
-	public int getIdUsuario() {
-		return idUsuario;
+	public Usuario getUsuarioD() {
+		return usuarioD;
 	}
 
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
+
+	public void setUsuarioD(Usuario usuarioD) {
+		this.usuarioD = usuarioD;
 	}
+
 
 
 	public int getIdEstado() {
@@ -99,10 +107,4 @@ public class Materia {
 		this.idEstado = idEstado;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Materia [idMateria=" + idMateria + ", nrc=" + nrc + ", nombreMateria=" + nombreMateria + ", idUsuario="
-				+ idUsuario + ", idEstado=" + idEstado + "]";
-	}
 }

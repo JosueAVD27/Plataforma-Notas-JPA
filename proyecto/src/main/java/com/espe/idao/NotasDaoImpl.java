@@ -14,16 +14,6 @@ import com.espe.model.registroNotas;
 public class NotasDaoImpl implements NotasDao {
 
 	EntityManager entity = JPAUtil.getEntityManagerFactory().createEntityManager();
-
-	/*@Override
-	public void guardarNota(Notas notas) {
-		entity.getTransaction().begin();
-		notas.setNota1(0);
-		notas.setNota2(0);
-		notas.setNota3(0);
-		entity.persist(notas);
-		entity.getTransaction().commit();
-	}*/
 	
 	@Override
 	public void guardarNota(registroNotas registroNotas) {

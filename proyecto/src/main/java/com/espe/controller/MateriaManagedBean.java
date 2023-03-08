@@ -12,6 +12,7 @@ import com.espe.dao.MateriaDao;
 import com.espe.idao.MateriaDaoImpl;
 import com.espe.model.Materia;
 import com.espe.model.Usuario;
+import com.espe.model.registroMateria;
 
 @ManagedBean(name = "materiaManagedBean")
 @RequestScoped
@@ -36,7 +37,7 @@ public class MateriaManagedBean {
 	public String actualizarMateria(Materia materia) {
 
 		try {
-			if (materia.getNrc() == 0 || materia.getNombreMateria() == "" || materia.getIdUsuario() == 0) {
+			if (materia.getNrc() == 0 || materia.getNombreMateria() == "" || materia.getUsuarioD().getIdUsuario() == 0) {
 				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hay campos vacios"));
 				return null;
@@ -59,30 +60,30 @@ public class MateriaManagedBean {
 	}
 
 	public String nuevoMateria() {
-		Materia oMateria = new Materia();
+		registroMateria oMateria = new registroMateria();
 
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
-		sessionMap.put("materia", oMateria);
+		sessionMap.put("registroMateria", oMateria);
 		return "/faces/administrador/materia/nuevo.xhtml";
 	}
 
-	public String guardarMateria(Materia materia) {
+	public String guardarMateria(registroMateria registroMateria) {
 
 		Usuario usuario = new Usuario();
 		try {
-			if (materia.getNrc() == 0 || materia.getNombreMateria() == "" || materia.getIdUsuario() == 0) {
+			if (registroMateria.getNrc() == 0 || registroMateria.getNombreMateria() == "" || registroMateria.getIdUsuario() == 0) {
 				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hay campos vacios"));
 				return null;
-			} else if (usuario.getIdUsuario() == materia.getIdUsuario() && usuario.getIdTipo() != 2) {
+			} else if (usuario.getIdUsuario() == registroMateria.getIdUsuario() && usuario.getIdTipo() != 2) {
 
 				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("El usuario no es Docente"));
 				return null;
 
 			} else {
-				materiaDAO.guardarMateria(materia);
+				materiaDAO.guardarMateria(registroMateria);
 				return "/faces/administrador/materia/materias.xhtml";
 			}
 		} catch (Exception e) {

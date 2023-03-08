@@ -45,6 +45,9 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notas> notas = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "usuarioD", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Materia> materia = new ArrayList<>();
+	
 	public Usuario() {
 		super();
 	}
@@ -58,6 +61,14 @@ public class Usuario {
 
 	public void setNotas(List<Notas> notas) {
 		this.notas = notas;
+	}
+
+	public List<Materia> getMateria() {
+		return materia;
+	}
+
+	public void setMateria(List<Materia> materia) {
+		this.materia = materia;
 	}
 
 

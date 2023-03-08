@@ -37,39 +37,26 @@
 			</f:facet>
 
 			<h:outputText value="NRC"></h:outputText>
-			<h:inputText value="#{materia.nrc}"></h:inputText>
+			<h:inputText value="#{registroMateria.nrc}"></h:inputText>
 
 			<h:outputText value="Materia"></h:outputText>
-			<h:inputText value="#{materia.nombreMateria}"></h:inputText>
+			<h:inputText value="#{registroMateria.nombreMateria}"></h:inputText>
 
 			<h:outputText value="Docente"></h:outputText>
-			<h:inputText value="#{materia.idUsuario}"></h:inputText>
+			<h:selectOneMenu value="#{registroMateria.idUsuario}">
+				<f:selectItems value="#{usuarioManagedBean.obtenerUsuarioDocente()}"
+					var="usuario" itemValue="#{usuario.idUsuario}"
+					itemLabel="#{usuario.nombreUsuario} #{usuario.apellidoUsuario}" />
+			</h:selectOneMenu>
 
 
 			<f:facet name="footer">
 				<h:commandButton
-					action="#{materiaManagedBean.guardarMateria(materia)}"
+					action="#{materiaManagedBean.guardarMateria(registroMateria)}"
 					value="Registrar"></h:commandButton>
 			</f:facet>
 
 		</h:panelGrid>
 	</h:form>
-
-	<h2>Referencias de Docente</h2>
-	<h:dataTable value="#{usuarioManagedBean.obtenerUsuarioDocente()}"
-		var="usuario" border="1">
-		<h:column>
-			<f:facet name="header">ID</f:facet>
-			<h:outputText value="#{usuario.idUsuario}"></h:outputText>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Nombre</f:facet>
-			<h:outputText value="#{usuario.nombreUsuario}"></h:outputText>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Apellido</f:facet>
-			<h:outputText value="#{usuario.apellidoUsuario}"></h:outputText>
-		</h:column>
-	</h:dataTable>
 </h:body>
 </html>

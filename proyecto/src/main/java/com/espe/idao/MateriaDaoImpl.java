@@ -9,16 +9,17 @@ import javax.persistence.Query;
 import com.espe.dao.MateriaDao;
 import com.espe.model.JPAUtil;
 import com.espe.model.Materia;
+import com.espe.model.registroMateria;
 
 public class MateriaDaoImpl implements MateriaDao{
 
 	EntityManager entity = JPAUtil.getEntityManagerFactory().createEntityManager();
 	
 	@Override
-	public void guardarMateria(Materia materia) {
+	public void guardarMateria(registroMateria registroMateria) {
 		entity.getTransaction().begin();
-		materia.setIdEstado(1);
-		entity.persist(materia);
+		registroMateria.setIdEstado(1);
+		entity.persist(registroMateria);
 		entity.getTransaction().commit();
 	}
 
@@ -40,7 +41,7 @@ public class MateriaDaoImpl implements MateriaDao{
 	@Override
 	public List<Materia> obtenerMateria() {
 		List<Materia> listaMateria = new ArrayList<Materia>();
-		Query q = entity.createQuery("SELECT c from Materia c");
+		Query q = entity.createQuery("SELECT c from Materia c JOIN FETCH c.usuarioD");
 		listaMateria = q.getResultList();
 		return listaMateria;
 	}

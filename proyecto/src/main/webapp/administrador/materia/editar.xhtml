@@ -37,10 +37,21 @@
 			<h:inputText value="#{materia.nrc}"></h:inputText>
 
 			<h:outputText value="Materia"></h:outputText>
-			<h:inputText value="#{materia.nombreMateria}"></h:inputText>
+			<h:selectOneMenu value="#{materia.idMateria}">
+				<f:selectItems value="#{materiaManagedBean.obtenerMateria()}"
+					var="materia" itemValue="#{materia.idMateria}"
+					itemLabel="#{materia.nombreMateria}" />
+			</h:selectOneMenu>
+
 
 			<h:outputText value="Docente"></h:outputText>
-			<h:inputText value="#{materia.idUsuario}"></h:inputText>
+			<h:selectOneMenu value="#{materia.usuarioD.idUsuario}">
+				<f:selectItems value="#{usuarioManagedBean.obtenerUsuarioDocente()}"
+					var="usuario" itemValue="#{usuario.idUsuario}"
+					itemLabel="#{usuario.nombreUsuario} #{usuario.apellidoUsuario}" />
+			</h:selectOneMenu>
+
+
 
 			<h:outputText value="Estado materia"></h:outputText>
 			<h:selectOneMenu value="#{materia.idEstado}">
