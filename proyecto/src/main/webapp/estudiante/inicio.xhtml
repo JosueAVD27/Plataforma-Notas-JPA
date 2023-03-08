@@ -24,5 +24,40 @@
 		<h:commandButton action="#{usuarioManagedBean.cerrarSesion()}"
 			value="Salir" class="btn_format btn_agregar"></h:commandButton>
 	</h:form>
+	
+	<section class="contenedorX">
+
+		<h2>
+			<h:outputText value="Calificaciones"></h:outputText>
+		</h2>
+
+		<h:form>
+			<h:dataTable value="#{notasManagedBean.obtenerNota()}" var="notas"
+				border="1">
+				<h:column rendered="false">
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{notas.idNotas}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Materia</f:facet>
+					<h:outputText value="#{notas.materia.nombreMateria}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nota 1</f:facet>
+					<h:outputText value="#{notas.nota1}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nota 2</f:facet>
+					<h:outputText value="#{notas.nota2}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nota 3</f:facet>
+					<h:outputText value="#{notas.nota3}"></h:outputText>
+				</h:column>
+				
+	
+			</h:dataTable>
+		</h:form>
+	</section>
 </h:body>
 </html>
