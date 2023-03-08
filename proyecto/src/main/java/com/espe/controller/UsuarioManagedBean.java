@@ -1,12 +1,12 @@
 package com.espe.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -23,6 +23,16 @@ public class UsuarioManagedBean {
 	private String correoUsuario;
 	private String claveUsuario;
 
+	private boolean isAuthenticated = false;
+
+    public boolean isAuthenticated() {
+        return isAuthenticated;
+    }
+
+    public void setAuthenticated(boolean isAuthenticated) {
+        this.isAuthenticated = isAuthenticated;
+    }
+	
 	// ======================================================================
 
 	UsuarioDao usuarioDAO = new UsuarioDaoImpl();
@@ -53,6 +63,8 @@ public class UsuarioManagedBean {
 			Map<String, Object> sessionMap = externalContext.getSessionMap();
 			sessionMap.put("usuarioSession", usuario);
 
+			isAuthenticated = true;
+			
 			if (usuario.getIdTipo() == 1) {
 				return "/faces/estudiante/inicio.xhtml";
 			} else if (usuario.getIdTipo() == 2) {
@@ -76,6 +88,16 @@ public class UsuarioManagedBean {
 		return "/faces/views/login.xhtml";
 	}
 
+	
+	public void checkAuthentication() throws IOException {
+		  if (!isAuthenticated) {
+		    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		    externalContext.redirect("/proyecto/faces/index.xhtml");
+		  }
+		}
+	
+	
+	
 	// ======================================================================
 
 	// Metodos
@@ -174,6 +196,7 @@ public class UsuarioManagedBean {
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 		sessionMap.put("usuario", oUsuario);
+		
 		return "/faces/administrador/inicio.xhtml";
 	}
 	

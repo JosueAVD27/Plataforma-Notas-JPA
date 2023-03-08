@@ -2,6 +2,11 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+    <f:viewAction action="#{usuarioManagedBean.checkAuthentication()}" />
+</f:metadata>
+
 <h:head>
 	<meta charset="utf-8" name="viewport"
 		content="width=device-width, initial-scale=1"
@@ -11,7 +16,7 @@
 <h:body>
 	<h2>Inicio Administrador</h2>
 	
-	<h:outputText value="#{usuarioSession.username}"></h:outputText>
+	<h:outputText value="#{sessionScope.usuarioSession.username}"></h:outputText>
 	<h:form>
 		<h:commandButton action="#{usuarioManagedBean.irInicioAdmin()}" value="Inicio" class="btn_format btn_agregar"></h:commandButton>
 		<h:commandButton action="#{usuarioManagedBean.cerrarSesion()}" value="Salir" class="btn_format btn_agregar"></h:commandButton>
