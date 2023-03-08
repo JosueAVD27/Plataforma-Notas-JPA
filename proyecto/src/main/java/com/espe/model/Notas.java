@@ -21,12 +21,12 @@ public class Notas {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
+
 	
-	/*@Column
-	private int idUsuario;*/
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idMateria")
+    private Materia materia;
 	
-	@Column
-	private int idMateria;
 	@Column
 	private double nota1;
 	@Column
@@ -59,24 +59,13 @@ public class Notas {
 		this.usuario = usuario;
 	}
 
-/*
-	public int getIdUsuario() {
-		return idUsuario;
+	public Materia getMateria() {
+		return materia;
 	}
 
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
-*/
-	public int getIdMateria() {
-		return idMateria;
-	}
-
-
-	public void setIdMateria(int idMateria) {
-		this.idMateria = idMateria;
+	public void setMateria(Materia materia) {
+		this.materia = materia;
 	}
 
 
@@ -112,16 +101,8 @@ public class Notas {
 
 	@Override
 	public String toString() {
-		return "Notas [idNotas=" + idNotas + ", usuario=" + usuario + ", idMateria=" + idMateria + ", nota1=" + nota1
+		return "Notas [idNotas=" + idNotas + ", usuario=" + usuario + ", materia=" + materia + ", nota1=" + nota1
 				+ ", nota2=" + nota2 + ", nota3=" + nota3 + "]";
 	}
-
-/*
-	@Override
-	public String toString() {
-		return "Notas [idNotas=" + idNotas + ", idUsuario=" + idUsuario + ", idMateria=" + idMateria + ", nota1="
-				+ nota1 + ", nota2=" + nota2 + ", nota3=" + nota3 + "]";
-	}*/
-	
 	
 }

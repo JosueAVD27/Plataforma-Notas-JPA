@@ -41,12 +41,16 @@
 					<h:outputText value="#{notas.idNotas}"></h:outputText>
 				</h:column>
 				<h:column>
-					<f:facet name="header">Estudiante</f:facet>
-					<h:outputText value="#{notas.idUsuario.nombreUsuario}" />
+					<f:facet name="header">Nombre</f:facet>
+					<h:outputText value="#{notas.usuario.nombreUsuario}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Apellido</f:facet>
+					<h:outputText value="#{notas.usuario.apellidoUsuario}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">Materia</f:facet>
-					<h:outputText value="#{notas.idMateria}"></h:outputText>
+					<h:outputText value="#{notas.materia.nombreMateria}"></h:outputText>
 				</h:column>
 				<h:column>
 					<f:facet name="header">Nota 1</f:facet>
@@ -69,16 +73,6 @@
 						action="#{notasManagedBean.editarNotaDocente(notas.idNotas)}"
 						value="Editar" class="btn_format btn_editar"></h:commandButton>
 				</h:column>
-			</h:dataTable>
-			
-			
-			<h:dataTable value="#{usuarioManagedBean.prueba()}" var="usuario"
-				border="1">
-				<h:column>
-					<f:facet name="header">Estudiante</f:facet>
-					<h:outputText value="#{usuario.idUsuario}" />
-				</h:column>
-
 			</h:dataTable>
 		</h:form>
 	</section>

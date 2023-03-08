@@ -46,7 +46,7 @@ public class NotasManagedBean {
 	public String actualizarNota(Notas notas) {
 
 		try {
-			if (notas.getUsuario().getIdUsuario() == 0 || notas.getIdMateria() == 0) {
+			if (notas.getUsuario().getIdUsuario() == 0 || notas.getMateria().getIdMateria() == 0) {
 				// Si la autenticación falló, mostramos un mensaje de error y no redirigimos
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hay campos vacios"));
 				return null;

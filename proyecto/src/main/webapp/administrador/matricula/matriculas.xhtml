@@ -54,12 +54,16 @@
 					<h:outputText value="#{notas.idNotas}"></h:outputText>
 				</h:column>
 				<h:column>
-					<f:facet name="header">Estudiante</f:facet>
+					<f:facet name="header">Nombre</f:facet>
 					<h:outputText value="#{notas.usuario.nombreUsuario}" />
 				</h:column>
 				<h:column>
+					<f:facet name="header">Apellido</f:facet>
+					<h:outputText value="#{notas.usuario.apellidoUsuario}" />
+				</h:column>
+				<h:column>
 					<f:facet name="header">Materia</f:facet>
-					<h:outputText value="#{notas.idMateria}"></h:outputText>
+					<h:outputText value="#{notas.materia.nombreMateria}"></h:outputText>
 				</h:column>
 				<h:column>
 					<f:facet name="header">Nota 1</f:facet>
