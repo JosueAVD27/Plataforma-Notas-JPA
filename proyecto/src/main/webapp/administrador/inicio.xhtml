@@ -21,7 +21,12 @@
 	<h:form>
 		<h:commandButton action="#{usuarioManagedBean.irInicioAdmin()}" value="Inicio" class="btn_format btn_agregar"></h:commandButton>
 		<h:commandButton action="#{usuarioManagedBean.cerrarSesion()}" value="Salir" class="btn_format btn_agregar"></h:commandButton>
+		
 		<h:commandButton action="#{usuarioManagedBean.irListaUsuariosAdmin()}" value="Usuarios" class="btn_format btn_agregar"></h:commandButton>
+		
+		<h:commandButton action="#{usuarioManagedBean.irListaConfiguracionesAdmin()}" value="Permisos" class="btn_format btn_agregar"></h:commandButton>
+		
+		<h:commandButton action="#{usuarioManagedBean.irListaMateriasAdmin()}" value="Materias" class="btn_format btn_agregar"></h:commandButton>
 	</h:form>
 </h:body>
 </html>

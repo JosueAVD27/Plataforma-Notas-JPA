@@ -12,10 +12,10 @@
 	<meta charset="utf-8" name="viewport"
 		content="width=device-width, initial-scale=1"
 		http-equiv="X-UA-Conpatible" />
-	<title>Usuarios</title>
+	<title>Materias</title>
 </h:head>
 <h:body>
-	<h2>Usuarios</h2>
+	<h2>Materias</h2>
 
 	<h:outputText value="#{usuarioSession.username}"></h:outputText>
 	<h:form>
@@ -24,68 +24,59 @@
 		<h:commandButton action="#{usuarioManagedBean.cerrarSesion()}"
 			value="Salir" class="btn_format btn_agregar"></h:commandButton>
 
+		<h:commandButton action="#{usuarioManagedBean.irListaUsuariosAdmin()}"
+			value="Usuarios" class="btn_format btn_agregar"></h:commandButton>
+
 		<h:commandButton
 			action="#{usuarioManagedBean.irListaConfiguracionesAdmin()}"
 			value="Permisos" class="btn_format btn_agregar"></h:commandButton>
-
-		<h:commandButton action="#{usuarioManagedBean.irListaMateriasAdmin()}"
-			value="Materias" class="btn_format btn_agregar"></h:commandButton>
 
 	</h:form>
 
 	<section class="contenedorX">
 
 		<h2>
-			<h:outputText value="Lista de Usuarios"></h:outputText>
+			<h:outputText value="Lista de Materias"></h:outputText>
 		</h2>
 
 		<h:form>
-			<h:dataTable value="#{usuarioManagedBean.obtenerUsuario()}"
-				var="usuario" border="1">
+		<h:commandButton value="Nueva Materia" action="#{materiaManagedBean.nuevoMateria()}" />
+
+			
+			<h:dataTable value="#{materiaManagedBean.obtenerMateria()}"
+				var="materia" border="1">
 				<h:column rendered="false">
 					<f:facet name="header">ID</f:facet>
-					<h:outputText value="#{usuario.idUsuario}"></h:outputText>
+					<h:outputText value="#{materia.idMateria}"></h:outputText>
 				</h:column>
 				<h:column>
-					<f:facet name="header">Nombre</f:facet>
-					<h:outputText value="#{usuario.nombreUsuario}"></h:outputText>
+					<f:facet name="header">NRC</f:facet>
+					<h:outputText value="#{materia.nrc}"></h:outputText>
 				</h:column>
 				<h:column>
-					<f:facet name="header">Apellido</f:facet>
-					<h:outputText value="#{usuario.apellidoUsuario}"></h:outputText>
+					<f:facet name="header">Materia</f:facet>
+					<h:outputText value="#{materia.nombreMateria}"></h:outputText>
 				</h:column>
 				<h:column>
-					<f:facet name="header">Cedula</f:facet>
-					<h:outputText value="#{usuario.cedulaUsuario}"></h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">Telefono</f:facet>
-					<h:outputText value="#{usuario.telefonoUsuario}"></h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">Correo</f:facet>
-					<h:outputText value="#{usuario.correoUsuario}"></h:outputText>
+					<f:facet name="header">Docente</f:facet>
+					<h:outputText value="#{materia.idUsuario}"></h:outputText>
 				</h:column>
 				<h:column>
 					<f:facet name="header">Estado</f:facet>
 					<h:outputText
-						value="#{usuario.idEstado eq 1 ? 'Activo' : usuario.idEstado eq 2 ? 'Inactivo' : ''}"></h:outputText>
+						value="#{materia.idEstado eq 1 ? 'Activo' : materia.idEstado eq 2 ? 'Inactivo' : ''}"></h:outputText>
 				</h:column>
-				<h:column>
-					<f:facet name="header">Permisos</f:facet>
-					<h:outputText
-						value="#{usuario.idTipo eq 1 ? 'Estudiante' : usuario.idTipo eq 2 ? 'Docente' : usuario.idTipo eq 3 ? 'Administrador' : ''}"></h:outputText>
-				</h:column>
+
 				<h:column>
 					<f:facet name="header"></f:facet>
 					<h:commandButton
-						action="#{usuarioManagedBean.editarUsuario(usuario.idUsuario)}"
+						action="#{materiaManagedBean.editarMateria(materia.idMateria)}"
 						value="Editar" class="btn_format btn_editar"></h:commandButton>
 				</h:column>
 				<h:column>
 					<f:facet name="header"></f:facet>
 					<h:commandButton
-						action="#{usuarioManagedBean.eliminarUsuario(usuario.idUsuario)}"
+						action="#{materiaManagedBean.eliminarMateria(materia.idMateria)}"
 						value="Eliminar" class="btn_format btn_cerrar"></h:commandButton>
 				</h:column>
 			</h:dataTable>

@@ -17,8 +17,9 @@ import com.espe.model.Usuario;
 
 @ManagedBean(name = "usuarioManagedBean")
 @SessionScoped
-public class UsuarioManagedBean {
+public class UsuarioManagedBean{
 
+	
 	// Variables de session
 	private String correoUsuario;
 	private String claveUsuario;
@@ -165,6 +166,10 @@ public class UsuarioManagedBean {
 	public List<Usuario> obtenerUsuario() {
 		return usuarioDAO.obtenerUsuario();
 	}
+	
+	public List<Usuario> obtenerUsuarioDocente() {
+		return usuarioDAO.obtenerUsuarioDocente();
+	}
 
 	public String editarUsuario(int id) {
 		Usuario oUsuario = new Usuario();
@@ -205,19 +210,17 @@ public class UsuarioManagedBean {
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 		sessionMap.put("usuario", oUsuario);
-		
-		if(isAuthenticatedEstudiante == true) {
+
+		if (isAuthenticatedEstudiante == true) {
 			return "/faces/estudiante/inicio.xhtml";
-		}else if(isAuthenticatedDocente == true) {
+		} else if (isAuthenticatedDocente == true) {
 			return "/faces/docente/inicio.xhtml";
-		}else {
+		} else {
 			return "/faces/administrador/inicio.xhtml";
 		}
-		
+
 	}
-	
-	
-	
+
 	// Direccionamiento al index (Plataforma)
 	public String irIndex() {
 		Usuario oUsuario = new Usuario();
@@ -269,6 +272,16 @@ public class UsuarioManagedBean {
 		return "/faces/administrador/inicio.xhtml";
 	}
 
+	// Direccionamiento al inicio Docente
+	public String irInicioDocente() {
+		Usuario oUsuario = new Usuario();
+
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+		sessionMap.put("usuario", oUsuario);
+		return "/faces/docente/inicio.xhtml";
+	}
+
 	// Direccionamiento a la lista de usuarios de Administrador
 	public String irListaUsuariosAdmin() {
 		Usuario oUsuario = new Usuario();
@@ -279,15 +292,25 @@ public class UsuarioManagedBean {
 		return "/faces/administrador/usuario/usuarios.xhtml";
 	}
 
-	// Direccionamiento al inicio Docente
-	public String irInicioDocente() {
+	// Direccionamiento a la lista de configuraciones de Administrador
+	public String irListaConfiguracionesAdmin() {
 		Usuario oUsuario = new Usuario();
 
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 		sessionMap.put("usuario", oUsuario);
-		return "/faces/docente/inicio.xhtml";
+		return "/faces/administrador/configutaciones/permisos.xhtml";
 	}
+	
+	// Direccionamiento a la lista de materias de Administrador
+		public String irListaMateriasAdmin() {
+			Usuario oUsuario = new Usuario();
+
+			Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+			sessionMap.put("usuario", oUsuario);
+			return "/faces/administrador/materia/materias.xhtml";
+		}
 
 	// ======================================================================
 

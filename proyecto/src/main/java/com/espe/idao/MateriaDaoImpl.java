@@ -17,6 +17,7 @@ public class MateriaDaoImpl implements MateriaDao{
 	@Override
 	public void guardarMateria(Materia materia) {
 		entity.getTransaction().begin();
+		materia.setIdEstado(1);
 		entity.persist(materia);
 		entity.getTransaction().commit();
 	}
@@ -39,7 +40,7 @@ public class MateriaDaoImpl implements MateriaDao{
 	@Override
 	public List<Materia> obtenerMateria() {
 		List<Materia> listaMateria = new ArrayList<Materia>();
-		Query q = entity.createQuery("SELECT c from Usuario c");
+		Query q = entity.createQuery("SELECT c from Materia c");
 		listaMateria = q.getResultList();
 		return listaMateria;
 	}

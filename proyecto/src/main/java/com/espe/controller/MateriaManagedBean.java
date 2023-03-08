@@ -13,8 +13,8 @@ import com.espe.model.Materia;
 
 @ManagedBean(name = "materiaManagedBean")
 @RequestScoped
-public class MateriaManagedBean {
-
+public class MateriaManagedBean{
+	
 	MateriaDao materiaDAO = new MateriaDaoImpl();
 	
 	public List<Materia> obtenerMateria() {
@@ -28,17 +28,17 @@ public class MateriaManagedBean {
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 		sessionMap.put("materia", oMateria);
-		return "/faces/editar.xhtml";
+		return "/faces/administrador/materia/editar.xhtml";
 	}
 	
 	public String actualizarMateria(Materia materia) {
 		materiaDAO.editarMateria(materia);
-		return "/faces/index.xhtml";
+		return "/faces/administrador/materia/materias.xhtml";
 	}
 	
 	public String eliminarMateria(int id) {
 		materiaDAO.eliminarMateria(id);
-		return "/faces/index.xhtml";
+		return "/faces/administrador/materia/materias.xhtml";
 	}
 	
 	public String nuevoMateria() {
@@ -47,11 +47,11 @@ public class MateriaManagedBean {
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 		sessionMap.put("materia", oMateria);
-		return "/faces/nuevo.xhtml";
+		return "/faces/administrador/materia/nuevo.xhtml";
 	}
 	
 	public String guardarMateria(Materia materia) {
 		materiaDAO.guardarMateria(materia);
-		return "/faces/index.xhtml";
+		return "/faces/administrador/materia/materias.xhtml";
 	}
 }

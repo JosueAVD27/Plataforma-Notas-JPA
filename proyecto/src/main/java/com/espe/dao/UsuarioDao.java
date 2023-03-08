@@ -20,6 +20,7 @@ public interface UsuarioDao {
 
 	// Obtener todos los usuarios
 	public List<Usuario> obtenerUsuario();
+	public List<Usuario> obtenerUsuarioDocente();
 
 	// Eliminar usuario
 	public void eliminarUsuario(int id);

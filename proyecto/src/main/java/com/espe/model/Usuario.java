@@ -1,8 +1,5 @@
 package com.espe.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,13 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.espe.dao.UsuarioDao;
-import com.espe.idao.UsuarioDaoImpl;
 
 @Entity
 @Table(name="usuarios")
 public class Usuario {
 
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idUsuario;

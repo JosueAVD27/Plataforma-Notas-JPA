@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+	<f:viewAction action="#{usuarioManagedBean.checkAuthentication()}" />
+	<f:viewAction action="#{usuarioManagedBean.checkAuthenticationAdmin()}" />
+</f:metadata>
+
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<title>Editar Materia</title>
+</h:head>
+<h:body>
+	<h2>Editar Materia</h2>
+	<h:outputText value="#{usuarioSession.username}"></h:outputText>
+	<h:form>
+		<h:commandButton action="#{usuarioManagedBean.irInicioAdmin()}"
+			value="Inicio" class="btn_format btn_agregar"></h:commandButton>
+		<h:commandButton action="#{usuarioManagedBean.cerrarSesion()}"
+			value="Salir" class="btn_format btn_agregar"></h:commandButton>
+
+		<h:commandButton action="#{usuarioManagedBean.irListaMateriasAdmin()}"
+			value="Materias" class="btn_format btn_agregar"></h:commandButton>
+	</h:form>
+
+	<h:form>
+		<h:panelGrid>
+			<f:facet name="header">
+				<h:outputText value="Editar Materia"></h:outputText>
+			</f:facet>
+
+			<h:outputText value="NRC"></h:outputText>
+			<h:inputText value="#{materia.nrc}"></h:inputText>
+
+			<h:outputText value="Materia"></h:outputText>
+			<h:inputText value="#{materia.nombreMateria}"></h:inputText>
+
+			<h:outputText value="Docente"></h:outputText>
+			<h:inputText value="#{materia.idUsuario}"></h:inputText>
+
+			<h:outputText value="Estado materia"></h:outputText>
+			<h:selectOneMenu value="#{materia.idEstado}">
+				<f:selectItem itemValue="#{materia.idEstado}" itemLabel="Cambiar" />
+				<f:selectItem itemValue="1" itemLabel="Activo" />
+				<f:selectItem itemValue="2" itemLabel="Inactivo" />
+				<f:converter converterId="javax.faces.Number" />
+			</h:selectOneMenu>
+
+			<f:facet name="footer">
+				<h:commandButton
+					action="#{materiaManagedBean.actualizarMateria(materia)}"
+					value="Actualizar"></h:commandButton>
+			</f:facet>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>
