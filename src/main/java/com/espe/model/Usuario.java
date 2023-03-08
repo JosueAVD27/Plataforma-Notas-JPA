@@ -2,8 +2,7 @@
 - Ajila Miguel
 - Enriquez Selena
 - Gonzales Daniela
-- Velasquez Josue
-/*
+- Velasquez Josue/*
 
 package com.espe.model;
 
