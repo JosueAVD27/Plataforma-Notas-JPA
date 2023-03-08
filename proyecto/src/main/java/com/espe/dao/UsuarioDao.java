@@ -24,6 +24,8 @@ public interface UsuarioDao {
 	public List<Usuario> obtenerUsuarioEstudiante();
 
 	public List<Usuario> prueba();
+	
+	/*public List<Notas> obtenerNotaPorId();*/
 
 	// Eliminar usuario
 	public void eliminarUsuario(int id);

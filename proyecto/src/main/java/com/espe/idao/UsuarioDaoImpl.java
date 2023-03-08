@@ -12,7 +12,6 @@ import javax.persistence.Query;
 import com.espe.dao.UsuarioDao;
 import com.espe.model.Usuario;
 import com.espe.model.JPAUtil;
-import com.espe.model.Notas;
 
 public class UsuarioDaoImpl implements UsuarioDao {
 
@@ -100,6 +99,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	    return usuario;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> prueba() {
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
@@ -113,4 +113,30 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		listaUsuarioEstudiante = q.getResultList();
 		return listaUsuarioEstudiante;
 	}
+	
+	/*@Override
+	public List<Notas> obtenerNotaPorId() {
+	    Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+	    Usuario u = (Usuario) sessionMap.get("usuarioSession");
+
+	    int variable = u.getIdUsuario();
+
+	    Query q = entity.createQuery("SELECT n FROM Notas n JOIN FETCH n.usuario u JOIN FETCH n.materia m WHERE u.idUsuario = :variable AND m.idUsuario = :variable");
+	    q.setParameter("variable", variable);
+
+	    return q.getResultList();
+	}
+	
+	@Override
+	public List<Notas> obtenerNotaPorId() {
+	    Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+	    Usuario u = (Usuario) sessionMap.get("usuarioSession");
+
+	    int variable = u.getIdUsuario();
+
+	    Query q = entity.createQuery("SELECT n FROM Notas n JOIN FETCH n.usuario u JOIN FETCH n.materia m WHERE u.idUsuario = :variable AND m.usuario.idUsuario = :variable");
+	    q.setParameter("variable", variable);
+
+	    return q.getResultList();
+	}*/
 }

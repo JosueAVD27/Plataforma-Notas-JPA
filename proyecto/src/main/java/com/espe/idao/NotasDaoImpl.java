@@ -56,7 +56,22 @@ public class NotasDaoImpl implements NotasDao {
 	    listaNotas = q.getResultList();
 	    return listaNotas;
 	}
-
+	
+	/*@SuppressWarnings("unchecked")
+	@Override
+	public List<registroNotas> obtenerNotaPorId() {
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		Usuario u = (Usuario) sessionMap.get("usuarioSession");
+				
+		int variable = u.getIdUsuario();
+		
+	    List<registroNotas> listaNotas = new ArrayList<registroNotas>();
+	    Query q = entity.createQuery("SELECT c from Notas c JOIN FETCH c.usuario u JOIN FETCH c.materia m WHERE m.idUsuario = :variable");
+	    q.setParameter("variable", variable);
+	    listaNotas = q.getResultList();
+	    return listaNotas;
+	}
+	 */
 
 	@Override
 	public void eliminarNota(int id) {

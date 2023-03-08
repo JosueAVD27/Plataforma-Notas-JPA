@@ -22,6 +22,10 @@ public class NotasManagedBean {
 	public List<Notas> obtenerNota() {
 		return notasDAO.obtenerNota();
 	}
+	
+	/*public List<registroNotas> obtenerNotaPorId() {
+		return notasDAO.obtenerNotaPorId();
+	}*/
 
 	public String editarNota(int id) {
 		Notas oNotas = new Notas();

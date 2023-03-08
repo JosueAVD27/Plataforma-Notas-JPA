@@ -18,6 +18,7 @@ public interface NotasDao {
 
 	// Obtener todas las notas
 	public List<Notas> obtenerNota();
+	/*public List<registroNotas> obtenerNotaPorId();*/
 
 	// Eliminar nota
 	public void eliminarNota(int id);

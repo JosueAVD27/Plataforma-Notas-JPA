@@ -183,6 +183,10 @@ public class UsuarioManagedBean {
 	public List<Usuario> prueba() {
 		return usuarioDAO.prueba();
 	}
+	
+	/*public List<Notas> obtenerNotaPorId() {
+		return usuarioDAO.obtenerNotaPorId();
+	}*/
 
 	public String editarUsuario(int id) {
 		Usuario oUsuario = new Usuario();
