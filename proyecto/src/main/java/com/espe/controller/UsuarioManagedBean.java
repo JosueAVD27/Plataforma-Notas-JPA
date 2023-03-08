@@ -23,16 +23,51 @@ public class UsuarioManagedBean {
 	private String correoUsuario;
 	private String claveUsuario;
 
+	// Variable para autenticar el redireccionamiento
+	// General
 	private boolean isAuthenticated = false;
 
-    public boolean isAuthenticated() {
-        return isAuthenticated;
-    }
+	public boolean isAuthenticated() {
+		return isAuthenticated;
+	}
 
-    public void setAuthenticated(boolean isAuthenticated) {
-        this.isAuthenticated = isAuthenticated;
-    }
-	
+	public void setAuthenticated(boolean isAuthenticated) {
+		this.isAuthenticated = isAuthenticated;
+	}
+
+	// Administrador
+	private boolean isAuthenticatedAdmin = false;
+
+	public boolean isAuthenticatedAdmin() {
+		return isAuthenticatedAdmin;
+	}
+
+	public void setAuthenticatedAdmin(boolean isAuthenticated) {
+		this.isAuthenticatedAdmin = isAuthenticated;
+	}
+
+	// Docente
+	private boolean isAuthenticatedDocente = false;
+
+	public boolean isAuthenticatedDocente() {
+		return isAuthenticatedDocente;
+	}
+
+	public void setAuthenticatedDocente(boolean isAuthenticated) {
+		this.isAuthenticatedDocente = isAuthenticated;
+	}
+
+	// Docente
+	private boolean isAuthenticatedEstudiante = false;
+
+	public boolean isAuthenticatedEstudiante() {
+		return isAuthenticatedEstudiante;
+	}
+
+	public void setAuthenticatedEstudiante(boolean isAuthenticated) {
+		this.isAuthenticatedEstudiante = isAuthenticated;
+	}
+
 	// ======================================================================
 
 	UsuarioDao usuarioDAO = new UsuarioDaoImpl();
@@ -64,12 +99,15 @@ public class UsuarioManagedBean {
 			sessionMap.put("usuarioSession", usuario);
 
 			isAuthenticated = true;
-			
+
 			if (usuario.getIdTipo() == 1) {
+				isAuthenticatedEstudiante = true;
 				return "/faces/estudiante/inicio.xhtml";
 			} else if (usuario.getIdTipo() == 2) {
+				isAuthenticatedDocente = true;
 				return "/faces/docente/inicio.xhtml";
 			} else {
+				isAuthenticatedAdmin = true;
 				return "/faces/administrador/inicio.xhtml";
 			}
 
@@ -88,16 +126,39 @@ public class UsuarioManagedBean {
 		return "/faces/views/login.xhtml";
 	}
 
-	
+	// Autenticar la redireccion
+	// General
 	public void checkAuthentication() throws IOException {
-		  if (!isAuthenticated) {
-		    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		    externalContext.redirect("/proyecto/faces/index.xhtml");
-		  }
+		if (!isAuthenticated) {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("/proyecto/faces/index.xhtml");
 		}
-	
-	
-	
+	}
+
+	// Administrador
+	public void checkAuthenticationAdmin() throws IOException {
+		if (!isAuthenticatedAdmin) {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("/proyecto/faces/restriction.xhtml");
+		}
+	}
+
+	// Docente
+	public void checkAuthenticationDocente() throws IOException {
+		if (!isAuthenticatedDocente) {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("/proyecto/faces/restriction.xhtml");
+		}
+	}
+
+	// Estudiante
+	public void checkAuthenticationEstudiante() throws IOException {
+		if (!isAuthenticatedEstudiante) {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("/proyecto/faces/restriction.xhtml");
+		}
+	}
+
 	// ======================================================================
 
 	// Metodos
@@ -125,18 +186,6 @@ public class UsuarioManagedBean {
 		return "/faces/administrador/usuario/usuarios.xhtml";
 	}
 
-	
-	//xd?
-	public String nuevoUsuario() {
-		Usuario oUsuario = new Usuario();
-
-		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-
-		sessionMap.put("usuario", oUsuario);
-		return "/faces/nuevo.xhtml";
-	}
-
-	
 	public String guardarUsuario(Usuario usuario) {
 		usuarioDAO.guardarUsuario(usuario);
 		return "/faces/views/login.xhtml";
@@ -149,6 +198,26 @@ public class UsuarioManagedBean {
 
 	// ======================================================================
 
+	// Direccionamiento de la restriccion al inicio
+	public String restriccionInicio() {
+		Usuario oUsuario = new Usuario();
+
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+		sessionMap.put("usuario", oUsuario);
+		
+		if(isAuthenticatedEstudiante == true) {
+			return "/faces/estudiante/inicio.xhtml";
+		}else if(isAuthenticatedDocente == true) {
+			return "/faces/docente/inicio.xhtml";
+		}else {
+			return "/faces/administrador/inicio.xhtml";
+		}
+		
+	}
+	
+	
+	
 	// Direccionamiento al index (Plataforma)
 	public String irIndex() {
 		Usuario oUsuario = new Usuario();
@@ -196,19 +265,19 @@ public class UsuarioManagedBean {
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 		sessionMap.put("usuario", oUsuario);
-		
+
 		return "/faces/administrador/inicio.xhtml";
 	}
-	
+
 	// Direccionamiento a la lista de usuarios de Administrador
-		public String irListaUsuariosAdmin() {
-			Usuario oUsuario = new Usuario();
+	public String irListaUsuariosAdmin() {
+		Usuario oUsuario = new Usuario();
 
-			Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
-			sessionMap.put("usuario", oUsuario);
-			return "/faces/administrador/usuario/usuarios.xhtml";
-		}
+		sessionMap.put("usuario", oUsuario);
+		return "/faces/administrador/usuario/usuarios.xhtml";
+	}
 
 	// Direccionamiento al inicio Docente
 	public String irInicioDocente() {
